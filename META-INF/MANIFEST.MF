@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Title: MC1161.6.9
+Implementation-Version: 1.6.9.4
+Specification-Vendor: FifouBE
+Specification-Title: Economy Inc.
+Implementation-Timestamp: 2021-04-29T14:10:18+0200
+Specification-Version: 1.6.9.4
+Implementation-Vendor: FifouBE
+

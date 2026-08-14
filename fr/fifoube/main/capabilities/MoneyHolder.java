@@ -1,0 +1,26 @@
+package fr.fifoube.main.capabilities;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+public class MoneyHolder implements IMoney {
+   private double money = (double)0.0F;
+
+   public double getMoney() {
+      return this.money;
+   }
+
+   public void setMoney(double money) {
+      this.money = this.round(money, 2);
+   }
+
+   private double round(double value, int places) {
+      if (places < 0) {
+         throw new IllegalArgumentException();
+      } else {
+         BigDecimal bd = BigDecimal.valueOf(value);
+         bd = bd.setScale(places, RoundingMode.HALF_UP);
+         return bd.doubleValue();
+      }
+   }
+}
