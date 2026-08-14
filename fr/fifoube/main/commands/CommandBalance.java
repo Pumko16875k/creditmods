@@ -5,6 +5,7 @@ import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import fr.fifoube.main.ModEconomyInc;
 import fr.fifoube.main.capabilities.CapabilityMoney;
+import fr.fifoube.main.util.MoneyFormatter; // <-- AJOUT DE L'IMPORT
 import java.util.Collection;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
@@ -28,7 +29,8 @@ public class CommandBalance {
                ModEconomyInc.LOGGER.info(playerMP.func_145748_c_().getString() + " has received " + money + ". Balance was at " + data.getMoney() + ", balance is now " + (data.getMoney() + money) + ".[UUID: " + playerMP.func_110124_au() + ",Command exectuor: " + src.func_197019_b().getString() + ", UUID: " + src.func_197022_f().func_110124_au() + "]");
                data.setMoney(data.getMoney() + money);
             });
-            src.func_197030_a(new TranslationTextComponent("commands.balance.added", new Object[]{money, playerMP.func_145748_c_().getString()}), false);
+            // Modifié : MoneyFormatter appliqué sur 'money'
+            src.func_197030_a(new TranslationTextComponent("commands.balance.added", new Object[]{MoneyFormatter.format(money), playerMP.func_145748_c_().getString()}), false);
          }
 
       });
@@ -43,7 +45,8 @@ public class CommandBalance {
                ModEconomyInc.LOGGER.info(playerMP.func_145748_c_().getString() + " has been withdrawn " + money + ". Balance was at " + data.getMoney() + ", balance is now " + (data.getMoney() - money) + ".[UUID: " + playerMP.func_110124_au() + ",Command exectuor: " + src.func_197019_b().getString() + ", UUID: " + src.func_197022_f().func_110124_au() + "]");
                data.setMoney(data.getMoney() - money);
             });
-            src.func_197030_a(new TranslationTextComponent("commands.balance.withdraw", new Object[]{money, playerMP.func_145748_c_().getString()}), false);
+            // Modifié : MoneyFormatter appliqué sur 'money'
+            src.func_197030_a(new TranslationTextComponent("commands.balance.withdraw", new Object[]{MoneyFormatter.format(money), playerMP.func_145748_c_().getString()}), false);
          }
 
       });
@@ -54,7 +57,8 @@ public class CommandBalance {
       targets.forEach((e) -> {
          if (e instanceof PlayerEntity) {
             ServerPlayerEntity playerMP = (ServerPlayerEntity)e;
-            playerMP.getCapability(CapabilityMoney.MONEY_CAPABILITY, (Direction)null).ifPresent((data) -> src.func_197030_a(new TranslationTextComponent("commands.balance.funds", new Object[]{playerMP.func_145748_c_().getString(), data.getMoney()}), false));
+            // Modifié : MoneyFormatter appliqué sur 'data.getMoney()'
+            playerMP.getCapability(CapabilityMoney.MONEY_CAPABILITY, (Direction)null).ifPresent((data) -> src.func_197030_a(new TranslationTextComponent("commands.balance.funds", new Object[]{playerMP.func_145748_c_().getString(), MoneyFormatter.format(data.getMoney())}), false));
          }
 
       });
