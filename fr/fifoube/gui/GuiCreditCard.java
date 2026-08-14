@@ -1,4 +1,4 @@
-package fr.fifoube.gui;
+import fr.fifoube.main.util.MoneyFormatter;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import fr.fifoube.main.capabilities.CapabilityMoney;
