@@ -97,6 +97,16 @@ public class GuiCreditCard extends Screen {
       InventoryScreen.func_228187_a_(this.guiLeft + 25, this.guiTop + 58, 25, (float)(this.guiLeft + 51) - (float)mouseX, (float)(this.guiTop + 75 - 50) - (float)mouseY, this.getMinecraft().field_71439_g);
       super.func_230430_a_(matrixStack, mouseX, mouseY, partialTicks);
       this.field_230712_o_.func_238421_b_(matrixStack, I18n.func_135052_a("title.ownerCard", new Object[0]) + ": " + this.name, (float)(this.field_230708_k_ / 2 - 75), (float)(this.field_230709_l_ / 2 - 55), Color.DARK_GRAY.getRGB());
-      this.field_230712_o_.func_238421_b_(matrixStack, I18n.func_135052_a("title.fundsCard", new Object[0]) + ": " + this.funds_s, (float)(this.field_230708_k_ / 2 - 75), (float)(this.field_230709_l_ / 2 - 45), Color.DARK_GRAY.getRGB());
+      
+      // --- MODIFICATION ICI ---
+      // Convertit la String funds_s en nombre puis la formate avec des points
+      String formattedFunds = this.funds_s;
+      try {
+          double amount = Double.parseDouble(this.funds_s.replace(",", "."));
+          formattedFunds = MoneyFormatter.format(amount);
+      } catch (Exception e) {
+          // En cas d'erreur de conversion, garde la valeur d'origine
+      }
+
+      this.field_230712_o_.func_238421_b_(matrixStack, I18n.func_135052_a("title.fundsCard", new Object[0]) + ": " + formattedFunds, (float)(this.field_230708_k_ / 2 - 75), (float)(this.field_230709_l_ / 2 - 45), Color.DARK_GRAY.getRGB());
    }
-}
